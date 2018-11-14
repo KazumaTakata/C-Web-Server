@@ -6,22 +6,22 @@ OBJS=server.o net.o file.o mime.o cache.o hashtable.o llist.o
 all: server
 
 server: $(OBJS)
-	gcc -o $@ $^
+	gcc -g -o $@ $^
 
 net.o: net.c net.h
-
-server.o: server.c net.h
-
-file.o: file.c file.h
-
+	$(CC) -c -g net.c
+server.o: server.c net.h server.h token.h
+	$(CC) -c -g server.c
+file.o: file.c file.h 
+	$(CC) -c -g file.c
 mime.o: mime.c mime.h
-
+	$(CC) -c -g mime.c
 cache.o: cache.c cache.h
-
+	$(CC) -c -g cache.c
 hashtable.o: hashtable.c hashtable.h
-
+	$(CC) -c -g hashtable.c 
 llist.o: llist.c llist.h
-
+	$(CC) -c -g llist.c 
 clean:
 	rm -f $(OBJS)
 	rm -f server
